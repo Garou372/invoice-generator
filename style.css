@@ -61,16 +61,12 @@ body {
   content: "Date: ";
   font-weight: bold;
 }
-
 #preview-due-date::before {
   content: "Due: ";
   font-weight: bold;
 }
 
-#preview-client-name::before {
-  content: "Bill To: ";
-  font-weight: bold;
-}
+
 #preview-section {
   display: flex;
   justify-content: center;
@@ -672,50 +668,28 @@ body {
   background: #0f172a;
   border: 1px solid #334155;
 }
-/* REMOVE THIS */
-#preview-client-name::before {
-  content: "Bill To:";
-}
-#bill-to-section {
-  background: #f8fafc;
-  color: #111827;
-}
 
-#bill-to-section h3 {
-  color: #111827;
-}
-
-#preview-client-name,
-#preview-client-business,
-#preview-client-email,
-#preview-client-address {
-  color: #475569;
-}
 /* BILL TO FIX */
 
-#bill-to-section {
-  background: #f8fafc !important;
-  color: #111827 !important;
-  padding: 20px !important;
+#bill-to-section{
+  background:#f8fafc !important;
+  color:#111827 !important;
+  padding:20px !important;
+  border-radius:12px !important;
 }
 
-#bill-to-section h3 {
-  color: #111827 !important;
-  font-size: 28px !important;
-  font-weight: 700 !important;
-  margin-bottom: 12px !important;
-}
-
-#preview-client-name::before {
-  content: "" !important;
+#bill-to-section h3{
+  color:#111827 !important;
+  font-size:22px !important;
+  font-weight:700 !important;
+  margin-bottom:12px !important;
 }
 
 #preview-client-name,
 #preview-client-business,
 #preview-client-email,
-#preview-client-address {
-  color: #334155 !important;
-  font-size: 14px !important;
-  display: block;
-  margin-top: 4px;
+#preview-client-address{
+  color:#334155 !important;
+  display:block !important;
+  margin:6px 0 !important;
 }
