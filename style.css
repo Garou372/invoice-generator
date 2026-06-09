@@ -693,3 +693,27 @@ body {
   display:block !important;
   margin:6px 0 !important;
 }
+body{
+  background:#f8fafc;
+}
+
+#form-section{
+  background:#ffffff;
+}
+
+.card{
+  background:#ffffff;
+  border:1px solid #e2e8f0;
+} 
+body.dark{
+  background:#020617;
+}
+
+body.dark #form-section{
+  background:#0f172a;
+}
+
+body.dark .card{
+  background:#1e293b;
+  border-color:#334155;
+}
