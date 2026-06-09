@@ -717,3 +717,23 @@ body.dark .card{
   background:#1e293b;
   border-color:#334155;
 }
+body.light{
+  background:#f8fafc;
+}
+
+body.light #form-section{
+  background:#ffffff;
+}
+
+body.light .card{
+  background:#ffffff;
+  border:1px solid #e2e8f0;
+}
+
+body.light .dashboard-header h1{
+  color:#111827;
+}
+
+body.light .dashboard-header p{
+  color:#64748b;
+}
