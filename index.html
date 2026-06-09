@@ -2,113 +2,265 @@
 <html lang="en">
   <head>
     <title>InvoiceGen by Noru</title>
-<meta name="author" content="Noru" />
-<meta name="description" content="Free invoice generator for freelancers — logo, tax, multi-currency, live preview & PDF download. No signup needed." />
+    <meta name="author" content="Noru" />
+    <meta
+      name="description"
+      content="Free invoice generator for freelancers — logo, tax, multi-currency, live preview & PDF download. No signup needed."
+    />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    
+
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <div class="container">
-      <div id="form-section">
-        <label for="logo-upload">Business Logo:</label>
-<input type="file" id="logo-upload" accept="image/*" />
-        <label for="name">Name:</label>
-        <input type="text" id="name" />
-        <label for="business-name">Business Name:</label>
-        <input type="text" id="business-name" />
-        <label for="email">Email:</label>
-        <input type="email" id="email" />
-        <label for="client-name">Client Name:</label>
-        <input type="text" id="client-name" />
-        <label for="client-business-name">Client Business Name:</label>
-        <input type="text" id="client-business-name" />
-        <label for="client-email">Client Email:</label>
-        <input type="email" id="client-email" />
-        <label for="invoice-number">Invoice Number:</label>
-        <input type="text" id="invoice-number" />
-        <label for="invoice-date">Invoice Date:</label>
-        <input type="date" id="invoice-date" />
-        <label for="due-date">Due Date:</label>
-        <input type="date" id="due-date" />
-        <div id="item-rows">
-          <div class="item-row">
-            <label>Item Description:</label>
-            <input type="text" class="item-description" />
-            <label>Item Quantity:</label>
-            <input type="number" class="item-quantity" />
-            <label>Item Price:</label>
-            <input type="number" class="item-price" step="0.01" />
-          
+    <div class="mobile-tabs">
+      <button id="form-tab" class="active">Form</button>
+      <button id="preview-tab">Preview</button>
+    </div>
 
+    <div class="container">
+      <!-- FORM SECTION -->
+      <div id="form-section">
+        <div class="dashboard-header">
+          <div>
+            <h1>Invoice Generator</h1>
+            <p>Create professional invoices instantly</p>
+          </div>
+
+          <div class="theme-toggle-wrapper">
+            <label class="switch">
+              <input type="checkbox" id="theme-toggle" />
+              <span class="slider"></span>
+            </label>
           </div>
         </div>
-        <label for="currency">Currency:</label>
-        <select id="currency">
-          <option value="USD">USD</option>
-          <option value="EUR">EUR</option>
-          <option value="GBP">GBP</option>
-          <option value="JPY">JPY</option>
-          <option value="AUD">AUD</option>
-          <option value="CAD">CAD</option>
-          <option value="CHF">CHF</option>
-          <option value="CNY">CNY</option>
-          <option value="SEK">SEK</option>
-          <option value="NZD">NZD</option>
-        </select>
-<label for="tax">Tax (%):</label>
-<input type="number" id="tax" placeholder="0" step="0.1" />
-        <button id="add-item">Add Item</button>
-        <label for="notes">Notes / Payment Terms:</label>
-<textarea id="notes" rows="3" placeholder="e.g. Payment due within 30 days..."></textarea>
-          <button id="print-btn">Download Invoice</button>
+
+        <!-- BUSINESS INFO -->
+        <div class="card">
+          <h3>Business Information</h3>
+
+          <label>Business Logo</label>
+          <input type="file" id="logo-upload" accept="image/*" />
+
+          <label>Name</label>
+          <input type="text" id="name" />
+
+          <label>Business Name</label>
+          <input type="text" id="business-name" />
+
+          <label>Email</label>
+          <input type="email" id="email" />
+
+          <label>Company Address</label>
+          <textarea id="company-address"></textarea>
+        </div>
+
+        <!-- CLIENT INFO -->
+        <div class="card">
+          <h3>Client Information</h3>
+
+          <label>Client Name</label>
+          <input type="text" id="client-name" />
+
+          <label>Client Business Name</label>
+          <input type="text" id="client-business-name" />
+
+          <label>Client Email</label>
+          <input type="email" id="client-email" />
+
+          <label>Client Address</label>
+          <textarea id="client-address"></textarea>
+        </div>
+
+        <!-- INVOICE DETAILS -->
+        <div class="card">
+          <h3>Invoice Details</h3>
+
+          <label>Invoice Number</label>
+          <input type="text" id="invoice-number" readonly />
+
+          <label>Invoice Date</label>
+          <input type="date" id="invoice-date" />
+
+          <label>Due Date</label>
+          <input type="date" id="due-date" />
+
+          <label>Payment Status</label>
+          <select id="payment-status">
+            <option>Draft</option>
+            <option>Pending</option>
+            <option>Paid</option>
+            <option>Overdue</option>
+          </select>
+        </div>
+
+        <!-- ITEMS -->
+        <div class="card">
+          <h3>Invoice Items</h3>
+
+          <div id="item-rows">
+            <div class="item-row">
+              <label>Description</label>
+              <input type="text" class="item-description" />
+
+              <label>Quantity</label>
+              <input type="number" class="item-quantity" />
+
+              <label>Price</label>
+              <input type="number" class="item-price" />
+
+              <button type="button" class="remove-item">Remove</button>
+            </div>
+          </div>
+
+          <button id="add-item">+ Add Item</button>
+        </div>
+
+        <!-- FINANCIAL -->
+        <div class="card">
+          <h3>Financial Settings</h3>
+
+          <label>Currency</label>
+          <select id="currency">
+            <option value="USD">$ USD</option>
+            <option value="EUR">€ EUR</option>
+            <option value="GBP">£ GBP</option>
+            <option value="INR">₹ INR</option>
+            <option value="JPY">¥ JPY</option>
+            <option value="AUD">A$ AUD</option>
+          </select>
+
+          <label>Discount (%)</label>
+          <input type="number" id="discount" />
+
+          <label>Tax (%)</label>
+          <input type="number" id="tax" />
+        </div>
+
+        <!-- PAYMENT -->
+        <div class="card">
+          <h3>Payment</h3>
+
+          <label>Payment Method</label>
+
+          <select id="payment-method">
+            <option>Bank Transfer</option>
+            <option>UPI</option>
+            <option>PayPal</option>
+            <option>Stripe</option>
+          </select>
+
+          <label>Payment Notes</label>
+
+          <textarea id="notes" placeholder="Payment instructions..."></textarea>
+        </div>
+
+        <!-- TERMS -->
+        <div class="card">
+          <h3>Terms & Conditions</h3>
+
+          <textarea
+            id="terms"
+            rows="4"
+            placeholder="Late fee after 15 days..."
+          ></textarea>
+        </div>
+
+        <!-- ANALYTICS -->
+        <div class="card analytics-card">
+          <h3>Analytics</h3>
+
+          <div class="analytics-grid">
+            <div class="analytics-box">
+              <h4>Total Invoices</h4>
+              <p id="total-invoices">0</p>
+            </div>
+
+            <div class="analytics-box">
+              <h4>Total Revenue</h4>
+              <p id="total-revenue">$0</p>
+            </div>
+
+            <div class="analytics-box">
+              <h4>Pending Amount</h4>
+              <p id="pending-amount">$0</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- ACTIONS -->
+        <div class="card action-card">
+          <button id="save-draft-btn">Save Draft</button>
+
+          <button id="print-btn">Download PDF</button>
+        </div>
       </div>
 
-    <div id="preview-section">
- <div id="invoice-paper">
-  <p id="invoice-footer">Generated by InvoiceGen</p>
-  <!-- TOP: Logo + Your Details -->
-  <div id="invoice-header">
-    <div id="sender-info">
-      <p id="preview-email"></p>
-      <img id="preview-logo" src="" style="display:none; max-height: 80px;" />
-      <h2 id="preview-name"></h2>
-      <p id="preview-business"></p>
-    </div>
-    <div id="invoice-meta">
-      <p id="preview-invoice-number"></p>
-      <p id="preview-invoice-date"></p>
-      <p id="preview-due-date"></p>
-    </div>
-  </div>
+      <!-- PREVIEW -->
+      <div id="preview-section">
+        <div id="invoice-paper">
+          <div id="invoice-header">
+            <div id="sender-info">
+              <img id="preview-logo" src="" style="display: none" />
 
-  <!-- BILL TO -->
-  <div id="bill-to-section">
-    <p id="preview-client-business"></p>
-<p id="preview-client-email"></p>
-    <!-- ITEMS TABLE -->
-<table id="preview-table">
-  <thead>
-    <tr>
-      <th>Description</th>
-      <th>Qty</th>
-      <th>Rate</th>
-      <th>Total</th>
-    </tr>
-  </thead>
-  <tbody id="preview-items">
-  </tbody>
-</table>
-    <p id="preview-client-name"></p>
-  </div>
+              <h2 id="preview-name"></h2>
 
-  <!-- TOTAL -->
-  <p id="preview-total"></p>
-  <p id="preview-notes"></p>
-</div>
- 
-</div>
+              <p id="preview-business"></p>
+
+              <p id="preview-email"></p>
+
+              <p id="preview-company-address"></p>
+            </div>
+
+            <div id="invoice-meta">
+              <p id="preview-status"></p>
+
+              <p id="preview-invoice-number"></p>
+
+              <p id="preview-invoice-date"></p>
+
+              <p id="preview-due-date"></p>
+            </div>
+          </div>
+
+          <div id="bill-to-section">
+            <h3>Bill To</h3>
+
+            <p id="preview-client-name"></p>
+
+            <p id="preview-client-business"></p>
+
+            <p id="preview-client-email"></p>
+
+            <p id="preview-client-address"></p>
+          </div>
+
+          <table id="preview-table">
+            <thead>
+              <tr>
+                <th>Description</th>
+                <th>Qty</th>
+                <th>Rate</th>
+                <th>Total</th>
+              </tr>
+            </thead>
+
+            <tbody id="preview-items"></tbody>
+          </table>
+
+          <div id="preview-total"></div>
+
+          <div id="preview-payment-method"></div>
+
+          <div id="preview-notes"></div>
+
+          <div id="preview-terms"></div>
+
+          <p id="invoice-footer">Generated by InvoiceGen</p>
+        </div>
+      </div>
+    </div>
+
     <script src="script.js"></script>
   </body>
 </html>
