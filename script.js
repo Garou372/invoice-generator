@@ -368,6 +368,8 @@ if (themeToggle) {
     );
   });
 }
+document.getElementById('theme-label').textContent = 
+  document.body.classList.contains('dark') ? 'Dark' : 'Light';
 
 /* =========================
    REMOVE FIRST ITEM
@@ -443,3 +445,31 @@ saveFormData = function () {
 
 updatePreview();
 calculateTotal();
+// FEEDBACK POPUP
+setTimeout(() => {
+  const shown = localStorage.getItem('feedbackShown');
+  if (!shown) {
+    const overlay = document.getElementById('feedback-overlay');
+    overlay.style.display = 'flex';
+  }
+}, 45000); // 45 seconds baad show hoga
+
+document.querySelectorAll('.fb-btn').forEach(btn => {
+  btn.addEventListener('click', function() {
+    const answer = this.getAttribute('data-val');
+    localStorage.setItem('feedbackShown', 'true');
+    document.getElementById('feedback-overlay').style.display = 'none';
+    
+    // GA4 event
+    gtag('event', 'feedback_submitted', {
+      'answer': answer
+    });
+
+    alert('Thanks for your feedback! 🙏');
+  });
+});
+
+document.getElementById('feedback-skip').addEventListener('click', () => {
+  localStorage.setItem('feedbackShown', 'true');
+  document.getElementById('feedback-overlay').style.display = 'none';
+});
